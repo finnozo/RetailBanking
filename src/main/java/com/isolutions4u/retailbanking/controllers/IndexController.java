@@ -28,12 +28,42 @@ public class IndexController implements ErrorController{
     public String getErrorPath() {
         return PATH;
     }
+
+
+    @GetMapping(value="/logout")
+    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/";
+    }
 	
-	@GetMapping("/ss")
+	@GetMapping("/login")
 	public String index() {
 		
 		return "login";
 	}
+
+
+    @GetMapping(value = "/Access_Denied")
+    public String accessDeniedPage(ModelMap model) {
+        model.addAttribute("user", getPrincipal());
+        return "accessDenied";
+    }
+
+
+    private String getPrincipal(){
+        String userName = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails)principal).getUsername();
+        } else {
+            userName = principal.toString();
+        }
+        return userName;
+    }
 
 
 

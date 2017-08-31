@@ -21,23 +21,30 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+
     @Autowired
-    public void configureGlobalSecurity(AuthenticationManagerBuilder
-                                                auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("bill").password("abc123").roles(
-                "USER");
-        auth.inMemoryAuthentication().withUser("admin").password("root123").roles(
-                "ADMIN");
-        auth.inMemoryAuthentication().withUser("dba").password("root123").roles(
-                "ADMIN", "DBA");
+    @Qualifier("customUserDetailsService")
+    UserDetailsService userDetailsService;
+
+    @Autowired
+    CustomSuccessHandler customSuccessHandler;
+
+    @Autowired
+    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService);
     }
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/", "/home").permitAll().antMatchers("/customer/list**")
+        http.authorizeRequests().antMatchers("/a", "/home").permitAll().antMatchers("/")
                 .access("hasRole('ADMIN')").antMatchers("/customer/showFormForAdd**")
-                .access("hasRole('ADMIN') and hasRole('DBA')").and().formLogin().and()
+                .access("hasRole('ADMIN') and hasRole('DBA')").and().formLogin().loginPage("/login")
+                .successHandler(customSuccessHandler).usernameParameter("ssoId").passwordParameter("password").and()
                 .csrf().and().exceptionHandling().accessDeniedPage("/Access_Denied");
     }
 

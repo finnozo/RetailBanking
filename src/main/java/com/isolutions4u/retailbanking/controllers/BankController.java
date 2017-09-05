@@ -9,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -29,6 +26,12 @@ public class BankController {
 
         model.addAttribute("branch", branch);
 
+        return "index1";
+
+    }
+
+    @GetMapping("/t")
+    public String list() {
         return "index";
 
     }
@@ -39,7 +42,7 @@ public class BankController {
         // save the customer using service
 
         if (bindingResult.hasErrors()) {
-            return "index";
+            return "index1";
         } else {
 
 
@@ -48,7 +51,7 @@ public class BankController {
             model.addAttribute("branch", branch);
 
 
-            return "index";
+            return "index1";
         }
     }
 
@@ -59,4 +62,7 @@ public class BankController {
         StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
         webDataBinder.registerCustomEditor(String.class,stringTrimmerEditor);
     }
+
+
+
 }

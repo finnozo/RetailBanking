@@ -104,6 +104,7 @@ public class EmployeeMaster {
     public void setMngrNo(String mngrNo) {
         this.mngrNo = mngrNo;
     }
+    
 
     @Override
     public String toString() {

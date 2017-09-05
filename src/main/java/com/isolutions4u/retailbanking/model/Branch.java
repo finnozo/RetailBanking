@@ -2,6 +2,7 @@ package com.isolutions4u.retailbanking.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -16,6 +17,7 @@ public class Branch {
     @Column(name = "NAME")
     @NotNull(message = "Branch Name is required")
     @Size(min = 4, message = "Minimum Length is Four Character")
+    @Pattern(regexp = "^[A-Za-z\b]+$", message = "Use letters only please")
     private String name;
 
     public Branch() {

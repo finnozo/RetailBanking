@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class BranchServiceImpl implements BranchService {
 
@@ -19,4 +21,13 @@ public class BranchServiceImpl implements BranchService {
         // save
         branchDAO.saveBranch(branch);
     }
+
+    @Override
+    @Transactional
+    public List<Branch> getAllBranches() {
+
+       return branchDAO.getAllBranches();
+
+    }
+
 }

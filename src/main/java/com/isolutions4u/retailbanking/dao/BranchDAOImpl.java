@@ -4,9 +4,11 @@ import com.isolutions4u.retailbanking.model.Branch;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 
 
 @Repository
@@ -27,6 +29,20 @@ public class BranchDAOImpl implements BranchDAO {
         branch.setBranchNo(branchNo);
         currentSession.saveOrUpdate(branch);
 
+    }
+
+    @Override
+    public List<Branch> getAllBranches() {
+
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        Query<Branch> query = currentSession.createQuery("from Branch", Branch.class);
+
+        // execute query and get result list
+
+        List<Branch> branches = query.getResultList();
+
+        return branches;
     }
 
 

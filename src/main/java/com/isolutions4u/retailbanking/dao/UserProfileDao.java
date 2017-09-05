@@ -1,8 +1,8 @@
 package com.isolutions4u.retailbanking.dao;
 
-import java.util.List;
-
 import com.isolutions4u.retailbanking.model.UserProfile;
+
+import java.util.List;
 
 public interface UserProfileDao {
 

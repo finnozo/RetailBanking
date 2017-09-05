@@ -6,8 +6,8 @@ public enum UserProfileType {
 	ADMIN("ADMIN");
 	
 	String userProfileType;
-	
-	private UserProfileType(String userProfileType){
+
+	UserProfileType(String userProfileType) {
 		this.userProfileType = userProfileType;
 	}
 	

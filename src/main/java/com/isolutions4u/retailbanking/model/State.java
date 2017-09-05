@@ -8,8 +8,8 @@ public enum State {
 	LOCKED("Locked");
 	
 	private String state;
-	
-	private State(final String state){
+
+	State(final String state) {
 		this.state = state;
 	}
 	

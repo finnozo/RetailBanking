@@ -1,8 +1,7 @@
 package com.isolutions4u.retailbanking.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.isolutions4u.retailbanking.model.User;
+import com.isolutions4u.retailbanking.model.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,8 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.isolutions4u.retailbanking.model.User;
-import com.isolutions4u.retailbanking.model.UserProfile;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service("customUserDetailsService")
 public class CustomUserDetailsService implements UserDetailsService{

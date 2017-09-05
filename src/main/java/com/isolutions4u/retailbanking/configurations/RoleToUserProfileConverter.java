@@ -1,11 +1,10 @@
 package com.isolutions4u.retailbanking.configurations;
 
+import com.isolutions4u.retailbanking.model.UserProfile;
+import com.isolutions4u.retailbanking.service.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-
-import com.isolutions4u.retailbanking.model.UserProfile;
-import com.isolutions4u.retailbanking.service.UserProfileService;
 
 @Component
 public class RoleToUserProfileConverter implements Converter<Object, UserProfile>{

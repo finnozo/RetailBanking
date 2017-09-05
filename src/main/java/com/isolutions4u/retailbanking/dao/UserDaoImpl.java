@@ -1,10 +1,9 @@
 package com.isolutions4u.retailbanking.dao;
 
+import com.isolutions4u.retailbanking.model.User;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
-
-import com.isolutions4u.retailbanking.model.User;
 
 @Repository("userDao")
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {

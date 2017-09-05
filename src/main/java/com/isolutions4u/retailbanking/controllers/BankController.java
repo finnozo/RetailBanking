@@ -30,6 +30,11 @@ public class BankController {
 
     }
 
+    @RequestMapping("/angularCall/{page}")
+    String partialHandler(@PathVariable("page") final String page) {
+        return page;
+    }
+
     @GetMapping("/t")
     public String list() {
         return "index";

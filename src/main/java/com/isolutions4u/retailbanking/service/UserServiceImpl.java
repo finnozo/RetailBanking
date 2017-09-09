@@ -11,23 +11,23 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-	@Autowired
-	private UserDao dao;
+    @Autowired
+    private UserDao dao;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-	public void save(User user) {
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		dao.save(user);
-	}
+    public void save(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        dao.save(user);
+    }
 
-	public User findById(int id) {
-		return dao.findById(id);
-	}
+    public User findById(int id) {
+        return dao.findById(id);
+    }
 
-	public User findBySso(String sso) {
-		return dao.findBySSO(sso);
-	}
+    public User findBySso(String sso) {
+        return dao.findBySSO(sso);
+    }
 
 }

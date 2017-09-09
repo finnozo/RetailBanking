@@ -6,7 +6,19 @@ import java.util.List;
 
 public interface BranchDAO {
 
+    Branch findByBranchNo(String branchNo);
+
+    Branch findByName(String name);
+
     void saveBranch(Branch branch);
 
-    List<Branch> getAllBranches();
+    void updateBranch(Branch branch);
+
+    void deleteUserByBranchNo(String branchNo);
+
+    void deleteAllBranches();
+
+    List<Branch> findAllBranches();
+
+    boolean isBranchExist(Branch branch);
 }

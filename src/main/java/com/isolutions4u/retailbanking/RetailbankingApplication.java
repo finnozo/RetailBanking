@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 @SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
 public class RetailbankingApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(RetailbankingApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(RetailbankingApplication.class, args);
+    }
 }

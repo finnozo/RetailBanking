@@ -4,30 +4,58 @@ import com.isolutions4u.retailbanking.dao.BranchDAO;
 import com.isolutions4u.retailbanking.model.Branch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class BranchServiceImpl implements BranchService {
 
-
     @Autowired
     private BranchDAO branchDAO;
 
+
     @Override
-    @Transactional
+    public Branch findByBranchNo(String branchNo) {
+        return branchDAO.findByBranchNo(branchNo);
+    }
+
+    @Override
+    public Branch findByName(String name) {
+        return branchDAO.findByName(name);
+    }
+
+    @Override
     public void saveBranch(Branch branch) {
-        // save
+
         branchDAO.saveBranch(branch);
+
     }
 
     @Override
-    @Transactional
-    public List<Branch> getAllBranches() {
+    public void updateBranch(Branch branch) {
+        branchDAO.updateBranch(branch);
+    }
 
-       return branchDAO.getAllBranches();
+    @Override
+    public void deleteUserByBranchNo(String branchNo) {
+
+        branchDAO.deleteUserByBranchNo(branchNo);
+    }
+
+    @Override
+    public void deleteAllBranches() {
+
+        branchDAO.deleteAllBranches();
 
     }
 
+    @Override
+    public List<Branch> findAllBranches() {
+        return branchDAO.findAllBranches();
+    }
+
+    @Override
+    public boolean isBranchExist(Branch branch) {
+        return branchDAO.isBranchExist(branch);
+    }
 }

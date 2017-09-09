@@ -19,6 +19,7 @@ public class BankController {
     @Autowired
     private BranchService branchService;
 
+
     @GetMapping("/")
     public String showFormForAdd(Model model) {
 
@@ -50,8 +51,7 @@ public class BankController {
             return "index1";
         } else {
 
-
-            branchService.saveBranch(branch);
+            branchService.saveBranch(branch);/*saveBranch(branch);*/
             branch.setName("");
             model.addAttribute("branch", branch);
 
@@ -62,12 +62,11 @@ public class BankController {
 
 
     @InitBinder
-    public void initBinder(WebDataBinder webDataBinder){
+    public void initBinder(WebDataBinder webDataBinder) {
 
         StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
-        webDataBinder.registerCustomEditor(String.class,stringTrimmerEditor);
+        webDataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
-
 
 
 }

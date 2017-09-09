@@ -17,15 +17,15 @@ public class EmployeeMaster {
     private String branchNo;
     @Column(name = "FNAME")
     private String fName;
-    @Column(name ="MNAME")
+    @Column(name = "MNAME")
     private String mName;
-    @Column(name ="LNAME")
+    @Column(name = "LNAME")
     private String lName;
-    @Column(name ="DEPT")
+    @Column(name = "DEPT")
     private String dept;
-    @Column(name ="DESIG")
+    @Column(name = "DESIG")
     private String desig;
-    @Column(name ="MNGR_NO")
+    @Column(name = "MNGR_NO")
     private String mngrNo;
 
     public EmployeeMaster() {
@@ -104,7 +104,7 @@ public class EmployeeMaster {
     public void setMngrNo(String mngrNo) {
         this.mngrNo = mngrNo;
     }
-    
+
 
     @Override
     public String toString() {

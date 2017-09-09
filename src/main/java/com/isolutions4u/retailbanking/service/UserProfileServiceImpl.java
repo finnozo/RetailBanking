@@ -10,20 +10,20 @@ import java.util.List;
 
 @Service("userProfileService")
 @Transactional
-public class UserProfileServiceImpl implements UserProfileService{
-	
-	@Autowired
-	UserProfileDao dao;
-	
-	public List<UserProfile> findAll() {
-		return dao.findAll();
-	}
+public class UserProfileServiceImpl implements UserProfileService {
 
-	public UserProfile findByType(String type){
-		return dao.findByType(type);
-	}
+    @Autowired
+    UserProfileDao dao;
 
-	public UserProfile findById(int id) {
-		return dao.findById(id);
-	}
+    public List<UserProfile> findAll() {
+        return dao.findAll();
+    }
+
+    public UserProfile findByType(String type) {
+        return dao.findByType(type);
+    }
+
+    public UserProfile findById(int id) {
+        return dao.findById(id);
+    }
 }

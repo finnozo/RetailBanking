@@ -4,11 +4,11 @@ import com.isolutions4u.retailbanking.model.User;
 
 public interface UserDao {
 
-	User findById(int id);
-	
-	User findBySSO(String sso);
+    User findById(int id);
 
-	void save(User user);
-	
+    User findBySSO(String sso);
+
+    void save(User user);
+
 }
 

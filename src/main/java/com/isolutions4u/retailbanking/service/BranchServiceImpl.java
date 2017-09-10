@@ -1,61 +1,34 @@
 package com.isolutions4u.retailbanking.service;
 
-import com.isolutions4u.retailbanking.dao.BranchDAO;
 import com.isolutions4u.retailbanking.model.Branch;
+import com.isolutions4u.retailbanking.repository.BranchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
-@Service
+@Service("branchService")
 public class BranchServiceImpl implements BranchService {
 
     @Autowired
-    private BranchDAO branchDAO;
+    private BranchRepository branchRepository;
 
 
     @Override
-    public Branch findByBranchNo(String branchNo) {
-        return branchDAO.findByBranchNo(branchNo);
+    public Branch findBranchByName(String name) {
+        return branchRepository.findByName(name);
     }
 
     @Override
-    public Branch findByName(String name) {
-        return branchDAO.findByName(name);
+    public Branch findBranchByBranchNo(String branchNo) {
+        return branchRepository.findByBranchNo(branchNo);
     }
 
     @Override
     public void saveBranch(Branch branch) {
 
-        branchDAO.saveBranch(branch);
+        String branchNo = branchRepository.count() + 10000 + "";
 
-    }
+        branch.setBranchNo(branchNo);
+        branchRepository.saveAndFlush(branch);
 
-    @Override
-    public void updateBranch(Branch branch) {
-        branchDAO.updateBranch(branch);
-    }
-
-    @Override
-    public void deleteUserByBranchNo(String branchNo) {
-
-        branchDAO.deleteUserByBranchNo(branchNo);
-    }
-
-    @Override
-    public void deleteAllBranches() {
-
-        branchDAO.deleteAllBranches();
-
-    }
-
-    @Override
-    public List<Branch> findAllBranches() {
-        return branchDAO.findAllBranches();
-    }
-
-    @Override
-    public boolean isBranchExist(Branch branch) {
-        return branchDAO.isBranchExist(branch);
     }
 }

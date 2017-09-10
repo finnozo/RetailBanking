@@ -4,69 +4,54 @@ package com.isolutions4u.retailbanking.controllers;
 import com.isolutions4u.retailbanking.model.Branch;
 import com.isolutions4u.retailbanking.service.BranchService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
 @Controller
+@RequestMapping("/admin")
 public class BankController {
 
     @Autowired
     private BranchService branchService;
 
 
-    @GetMapping("/")
-    public String showFormForAdd(Model model) {
-
+    @GetMapping(value = "/branchForm")
+    public ModelAndView bankCreateForm() {
+        ModelAndView modelAndView = new ModelAndView();
         Branch branch = new Branch();
-
-        model.addAttribute("branch", branch);
-
-        return "index1";
-
+        modelAndView.addObject("branch", branch);
+        modelAndView.setViewName("admin/branch-creation");
+        return modelAndView;
     }
 
-    @RequestMapping("/angularCall/{page}")
-    String partialHandler(@PathVariable("page") final String page) {
-        return page;
-    }
 
-    @GetMapping("/t")
-    public String list() {
-        return "index";
-
-    }
-
-    @PostMapping("/")
-    public String saveCustomer(@Valid @ModelAttribute("branch") Branch branch, BindingResult bindingResult, Model model) {
-
-        // save the customer using service
-
-        if (bindingResult.hasErrors()) {
-            return "index1";
-        } else {
-
-            branchService.saveBranch(branch);/*saveBranch(branch);*/
-            branch.setName("");
-            model.addAttribute("branch", branch);
-
-
-            return "index1";
+    @PostMapping(value = "/branchForm")
+    public ModelAndView createNewUser(@Valid Branch branch, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView();
+        Branch branchExists = branchService.findBranchByBranchNo(branch.getBranchNo());
+        if (branchExists != null) {
+            bindingResult
+                    .rejectValue("branchNo", "error.branch",
+                            "There is already a Branch registered with the Same Branch");
         }
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("admin/branch-creation");
+        } else {
+            branchService.saveBranch(branch);
+            modelAndView.addObject("successMessage", "Branch has been created successfully");
+            modelAndView.addObject("branch", new Branch());
+            modelAndView.setViewName("admin/branch-creation");
+
+        }
+        return modelAndView;
     }
 
-
-    @InitBinder
-    public void initBinder(WebDataBinder webDataBinder) {
-
-        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
-        webDataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
-    }
 
 
 }

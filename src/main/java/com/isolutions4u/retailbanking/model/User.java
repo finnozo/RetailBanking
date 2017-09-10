@@ -1,40 +1,41 @@
 package com.isolutions4u.retailbanking.model;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.data.annotation.Transient;
+
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "APP_USER")
+@Table(name = "user")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
     private int id;
-
-    @Column(name = "SSO_ID", unique = true, nullable = false)
-    private String ssoId;
-
-    @Column(name = "PASSWORD", nullable = false)
-    private String password;
-
-    @Column(name = "FIRST_NAME", nullable = false)
-    private String firstName;
-
-    @Column(name = "LAST_NAME", nullable = false)
-    private String lastName;
-
-    @Column(name = "EMAIL", nullable = false)
+    @Column(name = "email")
+    @Email(message = "*Please provide a valid Email")
+    @NotEmpty(message = "*Please provide an email")
     private String email;
-
-    @Column(name = "STATE", nullable = false)
-    private String state = State.ACTIVE.getState();
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "APP_USER_USER_PROFILE",
-            joinColumns = {@JoinColumn(name = "USER_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "USER_PROFILE_ID")})
-    private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
+    @Column(name = "password")
+    @Length(min = 5, message = "*Your password must have at least 5 characters")
+    @NotEmpty(message = "*Please provide your password")
+    @Transient
+    private String password;
+    @Column(name = "name")
+    @NotEmpty(message = "*Please provide your name")
+    private String name;
+    @Column(name = "last_name")
+    @NotEmpty(message = "*Please provide your last name")
+    private String lastName;
+    @Column(name = "active")
+    private int active;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
     public int getId() {
         return id;
@@ -42,14 +43,6 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getSsoId() {
-        return ssoId;
-    }
-
-    public void setSsoId(String ssoId) {
-        this.ssoId = ssoId;
     }
 
     public String getPassword() {
@@ -60,12 +53,12 @@ public class User {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLastName() {
@@ -84,56 +77,20 @@ public class User {
         this.email = email;
     }
 
-    public String getState() {
-        return state;
+    public int getActive() {
+        return active;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setActive(int active) {
+        this.active = active;
     }
 
-    public Set<UserProfile> getUserProfiles() {
-        return userProfiles;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setUserProfiles(Set<UserProfile> userProfiles) {
-        this.userProfiles = userProfiles;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + id;
-        result = prime * result + ((ssoId == null) ? 0 : ssoId.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (!(obj instanceof User))
-            return false;
-        User other = (User) obj;
-        if (id != other.id)
-            return false;
-        if (ssoId == null) {
-            if (other.ssoId != null)
-                return false;
-        } else if (!ssoId.equals(other.ssoId))
-            return false;
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", ssoId=" + ssoId + ", password=" + password
-                + ", firstName=" + firstName + ", lastName=" + lastName
-                + ", email=" + email + ", state=" + state + ", userProfiles=" + userProfiles + "]";
-    }
-
 
 }

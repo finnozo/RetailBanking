@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+    <title>Baking Project</title>
+
+
+    <link rel="stylesheet" type="text/css" th:href="@{/bank/css/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/bank/css/demo.css}"/>
+    <!-- Pushy CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/bank/css/pushy.css}"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+</head>
+<body>
+
+<header class="site-header push">Welcome to Banking Project</header>
+
+<!-- Pushy Menu -->
+<nav class="pushy pushy-left" data-focus="#first-link">
+    <div class="pushy-content">
+        <ul>
+            <li class="pushy-submenu">
+                <button id="first-link">Branch</button>
+                <ul>
+                    <li class="pushy-link"><a href="/admin/branchForm">Branch Creation</a></li>
+                    <li class="pushy-link"><a href="#">Item 2</a></li>
+                    <li class="pushy-link"><a href="#">Item 3</a></li>
+                </ul>
+            </li>
+            <li class="pushy-submenu">
+                <button>Submenu 2</button>
+                <ul>
+                    <li class="pushy-link"><a href="#">Item 1</a></li>
+                    <li class="pushy-link"><a href="#">Item 2</a></li>
+                    <li class="pushy-link"><a href="#">Item 3</a></li>
+                </ul>
+            </li>
+            <li class="pushy-submenu">
+                <button>Submenu 3</button>
+                <ul>
+                    <li class="pushy-link"><a href="#">Item 1</a></li>
+                    <li class="pushy-link"><a href="#">Item 2</a></li>
+                    <li class="pushy-link"><a href="#">Item 3</a></li>
+                </ul>
+            </li>
+            <li class="pushy-submenu">
+                <button>Submenu 4</button>
+                <ul>
+                    <li class="pushy-link"><a href="#">Item 1</a></li>
+                    <li class="pushy-link"><a href="#">Item 2</a></li>
+                    <li class="pushy-link"><a href="#">Item 3</a></li>
+                </ul>
+            </li>
+            <li class="pushy-link"><a href="#">Item 1</a></li>
+            <li class="pushy-link"><a href="#">Item 2</a></li>
+            <li class="pushy-link"><a href="#">Item 3</a></li>
+            <li class="pushy-link"><a href="#">Item 4</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Site Overlay -->
+<div class="site-overlay"></div>
+
+<!-- Your Content -->
+<div id="container">
+    <!-- Menu Button -->
+    <button class="menu-btn">&#9776; Menu</button>
+
+    <p style="float:right !important;">
+        <a th:href="@{/logout}" class="btn btn-info btn-lg">
+            <span class="glyphicon glyphicon-log-out"></span> Log out
+        </a>
+    </p>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pharetra neque a diam cursus pulvinar.</p>
+    <form autocomplete="off" action="#" th:action="@{/admin/branchForm}"
+          th:object="${branch}" method="post" class="form-horizontal"
+          role="form">
+        <h2>Branch Creation Form</h2>
+        <div class="form-group">
+            <div class="col-sm-9">
+                <label th:if="${#fields.hasErrors('branchNo')}" th:errors="*{branchNo}"
+                       class="validation-message"></label>
+                <input type="text" th:field="*{branchNo}" placeholder="Branch No"
+                       class="form-control"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-9">
+                <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                       class="validation-message"></label>
+                <input type="text" th:field="*{name}"
+                       placeholder="Branch Name" class="form-control"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-9">
+                <button type="submit" class="btn btn-primary btn-block">Create Branch</button>
+            </div>
+        </div>
+
+        <span th:utext="${successMessage}"></span>
+
+
+    </form>
+</div>
+
+<footer class="site-footer push">This is a footer</footer>
+
+<!-- Pushy JS -->
+<script th:src="@{/bank/js/pushy.min.js}"></script>
+
+</body>
+</html>

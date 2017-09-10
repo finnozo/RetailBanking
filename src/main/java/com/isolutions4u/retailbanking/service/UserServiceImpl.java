@@ -1,33 +1,38 @@
 package com.isolutions4u.retailbanking.service;
 
-import com.isolutions4u.retailbanking.dao.UserDao;
+import com.isolutions4u.retailbanking.model.Role;
 import com.isolutions4u.retailbanking.model.User;
+import com.isolutions4u.retailbanking.repository.RoleRepository;
+import com.isolutions4u.retailbanking.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-@Service
-@Transactional
+import java.util.Arrays;
+import java.util.HashSet;
+
+@Service("userService")
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserDao dao;
-
+    private UserRepository userRepository;
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private RoleRepository roleRepository;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public void save(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        dao.save(user);
+    @Override
+    public User findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
-    public User findById(int id) {
-        return dao.findById(id);
-    }
-
-    public User findBySso(String sso) {
-        return dao.findBySSO(sso);
+    @Override
+    public void saveUser(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setActive(1);
+        Role userRole = roleRepository.findByRole("ADMIN");
+        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        userRepository.save(user);
     }
 
 }

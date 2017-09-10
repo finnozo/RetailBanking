@@ -20,7 +20,7 @@ public class Branch {
     @Column(name = "NAME")
     @NotNull(message = "Branch Name is required")
     @Size(min = 4, message = "Minimum Length is Four Character")
-    @Pattern(regexp = "^[A-Za-z\b]+$", message = "Use letters only please")
+    @Pattern(regexp = "^[A-Za-z]+$", message = "Use letters only please")
     private String name;
 
     public Branch() {
@@ -47,12 +47,4 @@ public class Branch {
         this.name = name;
     }
 
-
-    @Override
-    public String toString() {
-        return "Branch{" +
-                "branchNo='" + branchNo + '\'' +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }

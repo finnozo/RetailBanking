@@ -2,91 +2,53 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml">
 <head>
-
+    <meta charset="UTF-8">
     <title>Baking Project</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
-    <link rel="stylesheet" type="text/css" th:href="@{/bank/css/normalize.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/bank/css/demo.css}"/>
-    <!-- Pushy CSS -->
-    <link rel="stylesheet" type="text/css" th:href="@{/bank/css/pushy.css}"/>
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/newstyle/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/newstyle/css/formStyle.css}">
 
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 </head>
+
 <body>
+<div id="wrapper">
+    <div class="overlay"></div>
 
-<header class="site-header push">Welcome to Banking Project</header>
+    <nav th:include="admin/navbar :: navbar" class="navbar navbar-default navbar-inverse" role="navigation">
 
-<!-- Pushy Menu -->
-<nav class="pushy pushy-left" data-focus="#first-link">
-    <div class="pushy-content">
-        <ul>
-            <li class="pushy-submenu">
-                <button id="first-link">Branch</button>
-                <ul>
-                    <li class="pushy-link"><a href="/admin/branchForm">Branch Creation</a></li>
-                    <li class="pushy-link"><a href="#">Item 2</a></li>
-                    <li class="pushy-link"><a href="#">Item 3</a></li>
-                </ul>
-            </li>
-            <li class="pushy-submenu">
-                <button>Submenu 2</button>
-                <ul>
-                    <li class="pushy-link"><a href="#">Item 1</a></li>
-                    <li class="pushy-link"><a href="#">Item 2</a></li>
-                    <li class="pushy-link"><a href="#">Item 3</a></li>
-                </ul>
-            </li>
-            <li class="pushy-submenu">
-                <button>Submenu 3</button>
-                <ul>
-                    <li class="pushy-link"><a href="#">Item 1</a></li>
-                    <li class="pushy-link"><a href="#">Item 2</a></li>
-                    <li class="pushy-link"><a href="#">Item 3</a></li>
-                </ul>
-            </li>
-            <li class="pushy-submenu">
-                <button>Submenu 4</button>
-                <ul>
-                    <li class="pushy-link"><a href="#">Item 1</a></li>
-                    <li class="pushy-link"><a href="#">Item 2</a></li>
-                    <li class="pushy-link"><a href="#">Item 3</a></li>
-                </ul>
-            </li>
-            <li class="pushy-link"><a href="#">Item 1</a></li>
-            <li class="pushy-link"><a href="#">Item 2</a></li>
-            <li class="pushy-link"><a href="#">Item 3</a></li>
-            <li class="pushy-link"><a href="#">Item 4</a></li>
-        </ul>
+    </nav>
+    <!-- Sidebar -->
+    <nav th:include="admin/side-menu :: navigation" class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper"
+         role="navigation">
+
+    </nav>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container">
+            <div style=" float:right !important;"><p th:utext="${userName}"></p></div>
+            <div class="row">
+                <div width="100%">
+                    <img th:src="@{/images/b2.jpg}" class="img-responsive center-block" width="100%"
+                         alt="WebApp"/>
+
+                </div>
+            </div>
+        </div>
     </div>
-</nav>
-
-<!-- Site Overlay -->
-<div class="site-overlay"></div>
-
-<!-- Your Content -->
-<div id="container">
-    <!-- Menu Button -->
-    <button class="menu-btn">&#9776; Menu</button>
-
-    <p style="float:right !important;">
-        <a th:href="@{/logout}" class="btn btn-info btn-lg">
-            <span class="glyphicon glyphicon-log-out"></span> Log out
-        </a>
-    </p>
-
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pharetra neque a diam cursus pulvinar.</p>
-    <img th:src="@{/bank/img/bank-logo.jpg}" class="img-responsive center-block" width="1000" height="500" alt="Beer"/>
+    <!-- /#page-content-wrapper -->
 
 </div>
+<!-- /#wrapper -->
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
 
-<footer class="site-footer push">This is a footer</footer>
-
-<!-- Pushy JS -->
-<script th:src="@{/bank/js/pushy.min.js}"></script>
+<script th:src="@{/newstyle/js/index.js}"></script>
 
 </body>
 </html>

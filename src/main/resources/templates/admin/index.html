@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
-
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" th:href="@{/newstyle/css/style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/newstyle/css/formStyle.css}">
 
@@ -18,7 +18,7 @@
 <div id="wrapper">
     <div class="overlay"></div>
 
-    <nav th:include="admin/navbar :: navbar" class="navbar navbar-default navbar-inverse" role="navigation">
+    <nav th:include="admin/navbar :: navbar" class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
 
     </nav>
     <!-- Sidebar -->
@@ -31,7 +31,7 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <div class="container">
-            <div style=" float:right !important;"><p th:utext="${userName}"></p></div>
+            <div style=" float:right !important; margin-top: 55px !important;"><p th:utext="${userName}"></p></div>
             <div class="row">
                 <div width="100%">
                     <img th:src="@{/images/b2.jpg}" class="img-responsive center-block" width="100%"

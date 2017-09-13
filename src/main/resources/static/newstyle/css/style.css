@@ -360,3 +360,6 @@ body a:hover {
   color: #fff;
 }
 */
+.navbar-brand{
+    font-family:'Satisfy',cursive;
+}

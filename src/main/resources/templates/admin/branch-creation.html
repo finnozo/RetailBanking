@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
-
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" th:href="@{/newstyle/css/style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/newstyle/css/formStyle.css}">
 
@@ -19,7 +19,7 @@
 <div id="wrapper">
     <div class="overlay"></div>
 
-    <nav th:include="admin/navbar :: navbar" class="navbar navbar-default navbar-inverse" role="navigation">
+    <nav th:include="admin/navbar :: navbar" class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
 
     </nav>
     <!-- Sidebar -->
@@ -31,7 +31,7 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <div class="container">
-            <div style=" float:right !important;"><p th:utext="${userName}"></p></div>
+            <div style=" float:right !important; margin-top: 55px !important;"><p th:utext="${userName}"></p></div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
                     <form class="form-style-9" autocomplete="off" action="#" th:action="@{/admin/branchForm}"
@@ -45,7 +45,7 @@
                                     <div class="col-sm-9">
                                         <label th:if="${#fields.hasErrors('branchNo')}" th:errors="*{branchNo}"
                                                class="validation-message"></label>
-                                        <input type="text" th:field="*{branchNo}" placeholder="Branch No Auto Generated"
+                                        <input type="text" th:field="*{branchNo}" placeholder="Branch Number Auto Generated"
                                                class="field-style field-full align-none" disabled="disabled"/><br>
 
                                         <span style="color: red;" th:utext="${successMessage}"></span>
@@ -60,7 +60,7 @@
                                                th:errors="*{name}"
                                                class="validation-message"></label>
                                         <input type="text" th:field="*{name}"
-                                               placeholder="Branch Name" class="field-style field-full align-none"/>
+                                               placeholder="Branch Name" required class="field-style field-full align-none"/>
                                     </div>
                                 </div>
                             </li>

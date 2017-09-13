@@ -6,6 +6,7 @@ import com.isolutions4u.retailbanking.model.User;
 import com.isolutions4u.retailbanking.service.BranchService;
 import com.isolutions4u.retailbanking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -22,9 +23,11 @@ import javax.validation.Valid;
 public class BankController {
 
     @Autowired
+    @Qualifier("branchService")
     private BranchService branchService;
 
     @Autowired
+    @Qualifier("userService")
     private UserService userService;
 
     @GetMapping(value = "/branchForm")
@@ -64,6 +67,17 @@ public class BankController {
             modelAndView.setViewName("admin/branch-creation");
 
         }
+        return modelAndView;
+    }
+
+
+    @GetMapping("/listBranches")
+    public ModelAndView listBranches(){
+        ModelAndView modelAndView = new ModelAndView();
+        Branch branch = new Branch();
+        userInfo(modelAndView);
+        modelAndView.addObject("branch", branch);
+        modelAndView.setViewName("admin/branches-list");
         return modelAndView;
     }
 

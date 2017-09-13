@@ -3,11 +3,15 @@ package com.isolutions4u.retailbanking.service;
 import com.isolutions4u.retailbanking.model.Branch;
 import com.isolutions4u.retailbanking.repository.BranchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service("branchService")
 public class BranchServiceImpl implements BranchService {
 
+    @Qualifier("branchRepository")
     @Autowired
     private BranchRepository branchRepository;
 
@@ -31,4 +35,11 @@ public class BranchServiceImpl implements BranchService {
         branchRepository.saveAndFlush(branch);
 
     }
+
+    @Override
+    public List<Branch> findAllBranches() {
+        return branchRepository.findAll();
+    }
+
+
 }

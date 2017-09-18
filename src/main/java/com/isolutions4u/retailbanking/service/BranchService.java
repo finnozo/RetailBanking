@@ -5,10 +5,18 @@ import com.isolutions4u.retailbanking.model.Branch;
 import java.util.List;
 
 public interface BranchService {
-    Branch findBranchByName(String name);
+    List<Branch> findBranchByName(String name);
 
     Branch findBranchByBranchNo(String branchNo);
-    void saveBranch(Branch branch);
+
+    String saveBranch(Branch branch);
 
     List<Branch> findAllBranches();
+
+    String updateBranch(Branch branch, String branchNo);
+
+    Branch findBranch(String branchNo);
+
+    String deleteBranch(String branchNo);
+
 }

@@ -82,5 +82,17 @@ public class BankController {
         return modelAndView;
     }
 
+    /*@GetMapping(value="/employee")
+    public ModelAndView Employee() {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("admin/branches-list");
+        return
+    }*/
+    @GetMapping("/empl")
+    public String Empl()
+    {
+        return "employeeCreation";
+    }
 
 }
